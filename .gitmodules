@@ -1,3 +1,7 @@
 [submodule "luaces"]
 	path = src
 	url = https://github.com/lunarmodules/luasec
+[submodule "openssl"]
+	path = externals/openssl
+	url = https://github.com/qlua-project/external-openssl-win64
+	branch = 3.5.0-dev
