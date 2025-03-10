@@ -1,5 +1,9 @@
 LuaSec
 
+Compilation Notes
+https://github.com/openssl/openssl/blob/master/NOTES-WINDOWS.md#linking-native-applications
+
+
 Client-Server TLS/SSL communication
 https://github.com/lunarmodules/luasec/wiki
 
