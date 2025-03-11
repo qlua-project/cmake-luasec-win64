@@ -52,5 +52,5 @@ target_link_libraries ( libluasecdll
         ws2_32 )
 
 install ( TARGETS libluasecdll RUNTIME )
-install ( FILES ${LUASEC_HOME}/src/ssl.lua DESTINATION shared )
-install ( FILES ${LUASEC_HOME}/src/https.lua DESTINATION shared/ssl )
+install ( FILES ${LUASEC_HOME}/src/ssl.lua DESTINATION bin )
+install ( FILES ${LUASEC_HOME}/src/https.lua DESTINATION bin/ssl )
