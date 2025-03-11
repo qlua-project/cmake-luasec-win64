@@ -54,3 +54,5 @@ target_link_libraries ( libluasecdll
 install ( TARGETS libluasecdll RUNTIME )
 install ( FILES ${LUASEC_HOME}/src/ssl.lua DESTINATION bin )
 install ( FILES ${LUASEC_HOME}/src/https.lua DESTINATION bin/ssl )
+install ( FILES ${OPENSSL_HOME}/bin/libssl-3-x64.dll DESTINATION bin )
+install ( FILES ${OPENSSL_HOME}/bin/libcrypto-3-x64.dll DESTINATION bin )
