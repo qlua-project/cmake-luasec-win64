@@ -48,7 +48,7 @@ target_compile_definitions (luasecobj PUBLIC
 #add_library ( libluasec STATIC $<TARGET_OBJECTS:luasecobj> )
 #set_target_properties ( libluasec PROPERTIES OUTPUT_NAME ssl )
 
-add_library ( libluasecdll SHARED $<TARGET_OBJECTS:luasecobj> )
+add_library ( libluasecdll MODULE $<TARGET_OBJECTS:luasecobj> )
 set_target_properties ( libluasecdll PROPERTIES OUTPUT_NAME ssl )
 target_link_libraries ( libluasecdll
         ${LUA_LIBRARY}
@@ -57,7 +57,7 @@ target_link_libraries ( libluasecdll
         libluasocket
         ws2_32 )
 
-install ( TARGETS libluasecdll RUNTIME )
+install ( TARGETS libluasecdll LIBRARY DESTINATION bin )
 install ( FILES ${LUASEC_HOME}/src/ssl.lua DESTINATION bin )
 install ( FILES ${LUASEC_HOME}/src/https.lua DESTINATION bin/ssl )
 install ( FILES ${OPENSSL_HOME}/bin/libssl-3-x64.dll DESTINATION bin )
