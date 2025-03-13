@@ -6,10 +6,9 @@ include ( CMakePrintHelpers )
 add_compile_options( /W4 )  # -Wall
 
 set ( LUASEC_HOME src CACHE PATH "Where to search LuaSec sources." )
-set ( LUA_HOME "externals/lua" CACHE PATH "Where to search Lua sources." )
+set ( ENV{LUA_DIR} "externals/lua" CACHE PATH "Where to search Lua sources." )
 set ( OPENSSL_HOME "externals/openssl" CACHE PATH "Where to search OpenSSL sources." )
 
-set(ENV{LUA_DIR} "${LUA_HOME}")
 find_package(Lua REQUIRED)
 message( STATUS "Lua Version ${LUA_VERSION_STRING}")
 message( STATUS "Lua Includes ${LUA_INCLUDE_DIR}")
@@ -22,7 +21,7 @@ list( TRANSFORM SRC_LIB PREPEND "${LUASEC_HOME}/" )
 
 add_library ( libluasocket STATIC ${SRC_LIB} )
 set_target_properties ( libluasocket PROPERTIES OUTPUT_NAME luasocket )
-target_include_directories( libluasocket PRIVATE ${LUA_HOME}/include )
+target_include_directories( libluasocket PRIVATE ${LUA_INCLUDE_DIR} )
 
 set ( SRC_CORE
         src/config.c src/context.c src/ec.c
@@ -32,7 +31,7 @@ list( TRANSFORM SRC_CORE PREPEND "${LUASEC_HOME}/" )
 set ( INSTALL_SOURCES src/ssl.lua src/https.lua )
 
 add_library ( luasecobj OBJECT ${SRC_CORE} )
-target_include_directories( luasecobj PRIVATE ${OPENSSL_HOME}/include ${LUA_HOME}/include ${LUASEC_HOME}/src )
+target_include_directories( luasecobj PRIVATE ${OPENSSL_HOME}/include ${LUA_INCLUDE_DIR} ${LUASEC_HOME}/src )
 # from src/luasec-1.3.2-1.rockspec
 target_compile_definitions (luasecobj PUBLIC
     WITH_LUASOCKET
@@ -52,7 +51,7 @@ target_compile_definitions (luasecobj PUBLIC
 add_library ( libluasecdll SHARED $<TARGET_OBJECTS:luasecobj> )
 set_target_properties ( libluasecdll PROPERTIES OUTPUT_NAME ssl )
 target_link_libraries ( libluasecdll
-        ${PROJECT_SOURCE_DIR}/${LUA_HOME}/lib/lua${LUA_VERSION_MAJOR}${LUA_VERSION_MINOR}.lib
+        ${LUA_LIBRARY}
         ${PROJECT_SOURCE_DIR}/${OPENSSL_HOME}/lib/libssl.lib
         ${PROJECT_SOURCE_DIR}/${OPENSSL_HOME}/lib/libcrypto.lib
         libluasocket
