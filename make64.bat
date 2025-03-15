@@ -81,7 +81,7 @@ rmdir /s /q "%cmake_build_dir%"
 goto END
 
 :DUMPBIN
-dumpbin64.bat %cmake_build_dir%
+call dumpbin64.bat %cmake_build_dir%
 
 :END
 popd
