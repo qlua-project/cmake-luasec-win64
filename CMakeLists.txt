@@ -37,7 +37,7 @@ target_include_directories( libluasocket PRIVATE ${LUA_INCLUDE_DIR} )
 target_compile_definitions (libluasocket PRIVATE
         # src\luasocket\buffer.c: buffer_meth_send, buffer_meth_receive
         # push time elapsed during operation as the last return value
-        # LUASOCKET_DEBUG
+        LUASOCKET_DEBUG
 )
 # target_link_libraries ( libluasocket
 #         ${LUA_LIBRARY}
