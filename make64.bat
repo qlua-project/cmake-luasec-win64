@@ -50,6 +50,7 @@ goto END
 
 :BUILD
 if NOT "%_CONFIGBUILD%" == "" echo - - - - - - - - - - - - - - - - - - - -
+call ..\config_luasec.bat
 cmake --build "%cmake_build_dir%"
 
 if ERRORLEVEL==1 goto END
