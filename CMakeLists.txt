@@ -50,7 +50,7 @@ target_include_directories( luasecobj PRIVATE ${OPENSSL_HOME}/include ${LUA_INCL
 target_compile_definitions (luasecobj PRIVATE
     # src\ssl.c: luaopen_ssl_core
     # Initialize internal library : socket_open();
-        WITH_LUASOCKET
+        # WITH_LUASOCKET
     # src\x509.c: +inet_ntop -> getnameinfo
     # For WinXP (SP3), set the following preprocessor macros: LUASEC_INET_NTOP, WINVER=0x0501, _WIN32_WINNT=0x0501, NTDDI_VERSION=0x05010300
         LUASEC_INET_NTOP
