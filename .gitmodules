@@ -1,4 +1,4 @@
-[submodule "luaces"]
+[submodule "luasec"]
 	path = src
 	url = https://github.com/lunarmodules/luasec
 [submodule "openssl"]
