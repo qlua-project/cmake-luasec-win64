@@ -4,6 +4,7 @@
 [submodule "openssl"]
 	path = externals/openssl
 	url = https://github.com/qlua-project/external-openssl-win64
+	branch = 3.4.1
 [submodule "lua"]
 	path = externals/lua
 	url = https://github.com/qlua-project/cmake-lua-win64
