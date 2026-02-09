@@ -6,7 +6,6 @@ project ( luasec VERSION 1.3.2.1 LANGUAGES C )
 add_compile_options( /W4 )  # -Wall
 
 set ( LUASEC_HOME src CACHE PATH "Where to search LuaSec sources." )
-set ( OPENSSL_HOME "${PROJECT_SOURCE_DIR}/externals/openssl" CACHE PATH "Where to search OpenSSL sources." )
 
 # C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-4.1\Modules\FindLua.cmake
 set ( ENV{LUA_DIR} "${PROJECT_SOURCE_DIR}/externals/lua" )  # FindLua.cmake
@@ -15,6 +14,19 @@ message( STATUS "Lua Version ${LUA_VERSION_STRING}" )
 message( STATUS "Lua Includes ${LUA_INCLUDE_DIR}" )
 message( STATUS "Lua Library ${LUA_LIBRARY}" )
 message( STATUS "Lua Libraries ${LUA_LIBRARIES}" )
+
+# https://cmake.org/cmake/help/latest/command/find_package.html#search-modes
+# https://cmake.org/cmake/help/latest/command/find_package.html#search-procedure:~:text=to%20FALSE%3A-,%3CPackageName%3E_DIR,-CMAKE_PREFIX_PATH
+set ( ENV{OpenSSL_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/externals/openssl/lib/cmake/OpenSSL" )  # Config mode
+find_package( OpenSSL REQUIRED CONFIG )
+message( STATUS "OpenSSL Version ${OpenSSL_VERSION}" )
+message( STATUS "OpenSSL Includes ${OPENSSL_INCLUDE_DIR}" )
+message( STATUS "OpenSSL Libraries ${OPENSSL_LIBRARIES}" )
+message( STATUS "OpenSSL SSL Library ${OPENSSL_SSL_LIBRARY}" )
+message( STATUS "OpenSSL SSL Libraries ${OPENSSL_SSL_LIBRARIES}" )
+message( STATUS "OpenSSL Crypto Library ${OPENSSL_CRYPTO_LIBRARY}" )
+message( STATUS "OpenSSL Crypto Libraries ${OPENSSL_CRYPTO_LIBRARIES}" )
+message( STATUS "OpenSSL AppLink Source ${OPENSSL_APPLINK_SOURCE}" )
 
 
 set ( SRC_SOCKET src/luasocket/buffer.c
@@ -40,7 +52,7 @@ target_compile_definitions (luasocketobj PRIVATE
 )
 
 add_library ( luasecobj OBJECT ${SRC_LUASEC} )
-target_include_directories( luasecobj PRIVATE ${OPENSSL_HOME}/include ${LUA_INCLUDE_DIR} ${LUASEC_HOME}/src )
+target_include_directories( luasecobj PRIVATE ${OPENSSL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${LUASEC_HOME}/src )
 # from src/luasec-1.3.2-1.rockspec : build['platforms']['windows']
 target_compile_definitions ( luasecobj PRIVATE
     # src\ssl.c: luaopen_ssl_core
@@ -68,8 +80,7 @@ target_link_libraries ( libluasecdll PRIVATE
         luasecobj
         luasocketobj
         ${LUA_LIBRARY}
-        ${OPENSSL_HOME}/lib/libssl.lib
-        ${OPENSSL_HOME}/lib/libcrypto.lib
+        OpenSSL::SSL  # fix: double dependency on libcrypto-3-x64.dll
         ws2_32  # as string passes directly to linker
 )
 
