@@ -1,19 +1,20 @@
 cmake_minimum_required ( VERSION 3.30 )
-project (luasec VERSION 1.3.2.1 LANGUAGES C)
+project ( luasec VERSION 1.3.2.1 LANGUAGES C )
 
 # include ( CMakePrintHelpers )
 
 add_compile_options( /W4 )  # -Wall
 
 set ( LUASEC_HOME src CACHE PATH "Where to search LuaSec sources." )
-set ( ENV{LUA_DIR} "externals/lua" CACHE PATH "Where to search Lua sources." )
-set ( OPENSSL_HOME "externals/openssl" CACHE PATH "Where to search OpenSSL sources." )
+set ( OPENSSL_HOME "${PROJECT_SOURCE_DIR}/externals/openssl" CACHE PATH "Where to search OpenSSL sources." )
 
-find_package(Lua REQUIRED)
-message( STATUS "Lua Version ${LUA_VERSION_STRING}")
-message( STATUS "Lua Includes ${LUA_INCLUDE_DIR}")
-message( STATUS "Lua Library ${LUA_LIBRARY}")
-message( STATUS "Lua Libraries ${LUA_LIBRARIES}")
+# C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-4.1\Modules\FindLua.cmake
+set ( ENV{LUA_DIR} "${PROJECT_SOURCE_DIR}/externals/lua" )  # FindLua.cmake
+find_package( Lua REQUIRED )
+message( STATUS "Lua Version ${LUA_VERSION_STRING}" )
+message( STATUS "Lua Includes ${LUA_INCLUDE_DIR}" )
+message( STATUS "Lua Library ${LUA_LIBRARY}" )
+message( STATUS "Lua Libraries ${LUA_LIBRARIES}" )
 
 
 set ( SRC_SOCKET src/luasocket/buffer.c
@@ -28,29 +29,23 @@ set ( SRC_LUASEC
 
 list( TRANSFORM SRC_SOCKET PREPEND "${LUASEC_HOME}/" )
 list( TRANSFORM SRC_LUASEC PREPEND "${LUASEC_HOME}/" )
-list( TRANSFORM INSTALL_SOURCES PREPEND "${LUASEC_HOME}/" )
 
 
-add_library ( libluasocket STATIC ${SRC_SOCKET} )  # SHARED
-set_target_properties ( libluasocket PROPERTIES OUTPUT_NAME luasocket )
-target_include_directories( libluasocket PRIVATE ${LUA_INCLUDE_DIR} )
-target_compile_definitions (libluasocket PRIVATE
+add_library ( luasocketobj OBJECT ${SRC_SOCKET} )
+target_include_directories( luasocketobj PRIVATE ${LUA_INCLUDE_DIR} )
+target_compile_definitions (luasocketobj PRIVATE
         # src\luasocket\buffer.c: buffer_meth_send, buffer_meth_receive
         # push time elapsed during operation as the last return value
         LUASOCKET_DEBUG
 )
-# target_link_libraries ( libluasocket
-#         ${LUA_LIBRARY}
-#         ws2_32
-# )
 
 add_library ( luasecobj OBJECT ${SRC_LUASEC} )
 target_include_directories( luasecobj PRIVATE ${OPENSSL_HOME}/include ${LUA_INCLUDE_DIR} ${LUASEC_HOME}/src )
 # from src/luasec-1.3.2-1.rockspec : build['platforms']['windows']
-target_compile_definitions (luasecobj PRIVATE
+target_compile_definitions ( luasecobj PRIVATE
     # src\ssl.c: luaopen_ssl_core
     # Initialize internal library : socket_open();
-        # WITH_LUASOCKET
+        WITH_LUASOCKET
     # src\x509.c: +inet_ntop -> getnameinfo
     # For WinXP (SP3), set the following preprocessor macros: LUASEC_INET_NTOP, WINVER=0x0501, _WIN32_WINNT=0x0501, NTDDI_VERSION=0x05010300
         LUASEC_INET_NTOP
@@ -62,19 +57,20 @@ target_compile_definitions (luasecobj PRIVATE
     #
     # _USRDLL # ?? unused
     # WIN32 NDEBUG _WINDOWS
+    #
+        OPENSSL_API_COMPAT=0x10101000L
 )
 
-#add_library ( libluasec STATIC $<TARGET_OBJECTS:luasecobj> )
-#set_target_properties ( libluasec PROPERTIES OUTPUT_NAME ssl )
 
-add_library ( libluasecdll MODULE $<TARGET_OBJECTS:luasecobj> )
+add_library( libluasecdll MODULE )
 set_target_properties ( libluasecdll PROPERTIES OUTPUT_NAME ssl )
-target_link_libraries ( libluasecdll
+target_link_libraries ( libluasecdll PRIVATE
+        luasecobj
+        luasocketobj
         ${LUA_LIBRARY}
-        ${PROJECT_SOURCE_DIR}/${OPENSSL_HOME}/lib/libssl.lib
-        ${PROJECT_SOURCE_DIR}/${OPENSSL_HOME}/lib/libcrypto.lib
-        libluasocket
-        ws2_32
+        ${OPENSSL_HOME}/lib/libssl.lib
+        ${OPENSSL_HOME}/lib/libcrypto.lib
+        ws2_32  # as string passes directly to linker
 )
 
 install ( TARGETS libluasecdll LIBRARY DESTINATION bin )
