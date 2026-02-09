@@ -12,9 +12,9 @@
 pushd %~dp0src\src
 
 :: externals\openssl\include\openssl\opensslv.h
-::     # define OPENSSL_VERSION_STR "3.5.0"
-::     # define OPENSSL_FULL_VERSION_STR "3.5.0-dev"
+::     # define OPENSSL_VERSION_STR "3.5.5"
+::     # define OPENSSL_FULL_VERSION_STR "3.5.5"
 
-"%~dp0externals\lua\bin\lua" options.lua -g "%~dp0externals\openssl\include\openssl\ssl.h" "3.5.0-dev" > options.c
+"%~dp0externals\lua\bin\lua" options.lua -g "%~dp0externals\openssl\include\openssl\ssl.h" "3.5.5" > options.c
 
 popd
