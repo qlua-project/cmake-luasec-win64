@@ -6,6 +6,7 @@ project ( luasec VERSION 1.3.2.1 LANGUAGES C )
 add_compile_options( /W4 )  # -Wall
 
 set ( LUASEC_HOME src CACHE PATH "Where to search LuaSec sources." )
+set ( LUASOCKET_HOME "${PROJECT_SOURCE_DIR}/externals/luasocket" CACHE PATH "Where to search LuaSocket sources (external)." )
 
 # C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-4.1\Modules\FindLua.cmake
 set ( ENV{LUA_DIR} "${PROJECT_SOURCE_DIR}/externals/lua" )  # FindLua.cmake
@@ -74,15 +75,24 @@ target_compile_definitions ( luasecobj PRIVATE
 )
 
 
+add_library ( libluasocket SHARED IMPORTED )
+set_target_properties( libluasocket PROPERTIES
+    IMPORTED_IMPLIB "${LUASOCKET_HOME}/lib/luasocket.lib"
+    IMPORTED_LOCATION "${LUASOCKET_HOME}/bin/socket/core.dll"
+    INTERFACE_INCLUDE_DIRECTORIES "${LUASOCKET_HOME}/include"
+)
+
 add_library( libluasecdll MODULE )
 set_target_properties ( libluasecdll PROPERTIES OUTPUT_NAME ssl )
 target_link_libraries ( libluasecdll PRIVATE
         luasecobj
-        luasocketobj
+        libluasocket
         ${LUA_LIBRARY}
         OpenSSL::SSL  # fix: double dependency on libcrypto-3-x64.dll
         ws2_32  # as string passes directly to linker
+        delayimp.lib  # helper library provided by MSVC that enables Delay Loading of DLLs
 )
+target_link_options ( libluasecdll PRIVATE "/DELAYLOAD:core.dll" )
 
 install ( TARGETS libluasecdll LIBRARY DESTINATION bin )
 install ( FILES ${LUASEC_HOME}/src/ssl.lua DESTINATION bin )
