@@ -2,7 +2,7 @@ package = "cmake-luasec-win64"
 version = "dev-1"
 source = {
    url = "git+ssh://git@github.com/qlua-project/cmake-luasec-win64.git",
-   tag = "v1-scm-5.4.1",
+   tag = "v1-patch-5.4.1",
 }
 supported_platforms = {
     "win32",
