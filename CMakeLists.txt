@@ -10,6 +10,12 @@ set ( LUASOCKET_HOME "${PROJECT_SOURCE_DIR}/externals/luasocket" CACHE PATH "Whe
 
 # C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-4.1\Modules\FindLua.cmake
 set ( ENV{LUA_DIR} "${PROJECT_SOURCE_DIR}/externals/lua" )  # FindLua.cmake
+# message(STATUS "LUA_DIR is now set to: $ENV{LUA_DIR}")
+# message(STATUS "LUASEC_HOME is now set to: ${LUASEC_HOME}")
+# message(STATUS "OPENSSL_HOME is now set to: ${OPENSSL_HOME}")
+# message(STATUS "CMAKE_PREFIX_PATH is now set to: ${CMAKE_PREFIX_PATH}")
+# message(STATUS "CMAKE_SOURCE_DIR is now set to: ${CMAKE_SOURCE_DIR}")
+# message(STATUS "CMAKE_CURRENT_SOURCE_DIR is now set to: ${CMAKE_CURRENT_SOURCE_DIR}")
 find_package( Lua REQUIRED )
 message( STATUS "Lua Version ${LUA_VERSION_STRING}" )
 message( STATUS "Lua Includes ${LUA_INCLUDE_DIR}" )
