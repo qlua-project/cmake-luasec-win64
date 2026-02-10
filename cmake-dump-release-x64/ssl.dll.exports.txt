@@ -22,7 +22,7 @@ File Type: DLL
           3    2 00001000 luaopen_ssl_config
           4    3 00002A50 luaopen_ssl_context
           5    4 00004AD0 luaopen_ssl_core
-          6    5 00006050 luaopen_ssl_x509
+          6    5 00006060 luaopen_ssl_x509
 
   Summary
 
@@ -31,4 +31,4 @@ File Type: DLL
         5000 .rdata
         1000 .reloc
         1000 .rsrc
-        8000 .text
+        7000 .text

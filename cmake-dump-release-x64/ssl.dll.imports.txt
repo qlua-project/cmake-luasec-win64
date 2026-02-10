@@ -9,18 +9,11 @@ File Type: DLL
   Section contains the following imports:
 
     lua54.dll
-             1800095A0 Import Address Table
-             18000C1A0 Import Name Table
+             1800085B8 Import Address Table
+             18000AFC8 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                          31 lua_callk
-                           B luaL_checknumber
-                          22 luaL_pushresult
-                           1 luaL_addlstring
-                          21 luaL_prepbuffsize
-                           5 luaL_buffinit
-                          20 luaL_optnumber
                           36 lua_copy
                            E luaL_checktype
                           1E luaL_optinteger
@@ -45,6 +38,7 @@ File Type: DLL
                           76 lua_setmetatable
                           69 lua_rawseti
                           70 lua_setfield
+                          5F lua_pushstring
                           77 lua_settable
                           54 lua_newuserdatauv
                           65 lua_rawgeti
@@ -69,8 +63,8 @@ File Type: DLL
                           57 lua_pushboolean
 
     libssl-3-x64.dll
-             180009390 Import Address Table
-             18000BF90 Import Name Table
+             1800083A8 Import Address Table
+             18000ADB8 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -141,8 +135,8 @@ File Type: DLL
                           B6 SSL_CTX_set_options
 
     libcrypto-3-x64.dll
-             180009138 Import Address Table
-             18000BD38 Import Name Table
+             180008150 Import Address Table
+             18000AB60 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -222,23 +216,17 @@ File Type: DLL
                          A99 OBJ_nid2sn
 
     WS2_32.dll
-             180009068 Import Address Table
-             18000BC68 Import Name Table
+             1800080B0 Import Address Table
+             18000AAC0 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
                           AA getnameinfo
-                             Ordinal   151
-                             Ordinal     3
-                             Ordinal    10
                              Ordinal   111
-                             Ordinal    18
-                             Ordinal   115
-                             Ordinal   116
 
     KERNEL32.dll
-             180009000 Import Address Table
-             18000BC00 Import Name Table
+             180008000 Import Address Table
+             18000AA10 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -247,12 +235,21 @@ File Type: DLL
                          246 GetCurrentThreadId
                          242 GetCurrentProcessId
                          481 QueryPerformanceCounter
-                         5C8 Sleep
                          31A GetSystemTimeAsFileTime
+                         3F5 LoadLibraryExA
+                         2DD GetProcAddress
+                         2A5 GetModuleHandleW
+                         553 SetDllDirectoryA
+                         498 RaiseException
+                         28D GetLastError
+                         314 GetSystemInfo
+                         61A VirtualProtect
+                         61C VirtualQuery
+                         1D4 FreeLibrary
 
     VCRUNTIME140.dll
-             180009040 Import Address Table
-             18000BC40 Import Name Table
+             180008088 Import Address Table
+             18000AA98 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -262,8 +259,8 @@ File Type: DLL
                           25 __std_type_info_destroy_list
 
     api-ms-win-crt-heap-l1-1-0.dll
-             1800090B0 Import Address Table
-             18000BCB0 Import Name Table
+             1800080C8 Import Address Table
+             18000AAD8 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -271,8 +268,8 @@ File Type: DLL
                           18 free
 
     api-ms-win-crt-string-l1-1-0.dll
-             180009110 Import Address Table
-             18000BD10 Import Name Table
+             180008128 Import Address Table
+             18000AB38 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -282,8 +279,8 @@ File Type: DLL
                           8E strncmp
 
     api-ms-win-crt-runtime-l1-1-0.dll
-             1800090C8 Import Address Table
-             18000BCC8 Import Name Table
+             1800080E0 Import Address Table
+             18000AAF0 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -296,6 +293,34 @@ File Type: DLL
                           36 _initterm
                           22 _execute_onexit_table
 
+  Section contains the following delay load imports:
+
+    core.dll
+              00000001 Characteristics
+      000000018000DA00 Address of HMODULE
+      000000018000D978 Import Address Table
+      000000018000A518 Import Name Table
+      000000018000A6D8 Bound Import Name Table
+      0000000000000000 Unload Import Name Table
+                     0 time date stamp
+
+                                    0000000180006781     E timeout_init
+                                    000000018000687D     D socket_waitfd
+                                    0000000180006793     F timeout_markstart
+                                    00000001800067A5    10 timeout_meth_settimeout
+                                    00000001800067B7     6 io_init
+                                    00000001800067C9     0 buffer_init
+                                    00000001800067DB     4 buffer_meth_send
+                                    00000001800067ED     3 buffer_meth_receive
+                                    00000001800067FF     2 buffer_meth_getstats
+                                    0000000180006811     5 buffer_meth_setstats
+                                    0000000180006823     1 buffer_isempty
+                                    0000000180006835     9 socket_open
+                                    0000000180006847     8 socket_destroy
+                                    0000000180006859     B socket_setnonblocking
+                                    000000018000686B     A socket_setblocking
+                                    000000018000688F     C socket_strerror
+
   Summary
 
         1000 .data
@@ -303,4 +328,4 @@ File Type: DLL
         5000 .rdata
         1000 .reloc
         1000 .rsrc
-        8000 .text
+        7000 .text

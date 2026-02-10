@@ -18,6 +18,10 @@ File Type: DLL
     api-ms-win-crt-string-l1-1-0.dll
     api-ms-win-crt-runtime-l1-1-0.dll
 
+  Image has the following delay load dependencies:
+
+    core.dll
+
   Summary
 
         1000 .data
@@ -25,4 +29,4 @@ File Type: DLL
         5000 .rdata
         1000 .reloc
         1000 .rsrc
-        8000 .text
+        7000 .text
