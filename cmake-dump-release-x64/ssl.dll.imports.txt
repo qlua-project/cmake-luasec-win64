@@ -1,4 +1,4 @@
-Microsoft (R) COFF/PE Dumper Version 14.43.34808.0
+Microsoft (R) COFF/PE Dumper Version 14.50.35723.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
@@ -9,12 +9,18 @@ File Type: DLL
   Section contains the following imports:
 
     lua54.dll
-             1800095E0 Import Address Table
-             18000C2A0 Import Name Table
+             1800095A0 Import Address Table
+             18000C1A0 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                          65 lua_rawgeti
+                          31 lua_callk
+                           B luaL_checknumber
+                          22 luaL_pushresult
+                           1 luaL_addlstring
+                          21 luaL_prepbuffsize
+                           5 luaL_buffinit
+                          20 luaL_optnumber
                           36 lua_copy
                            E luaL_checktype
                           1E luaL_optinteger
@@ -35,23 +41,17 @@ File Type: DLL
                            A luaL_checklstring
                           10 luaL_checkversion_
                           39 lua_error
-                          31 lua_callk
+                          5F lua_pushstring
                           76 lua_setmetatable
                           69 lua_rawseti
                           70 lua_setfield
                           77 lua_settable
                           54 lua_newuserdatauv
-                          5F lua_pushstring
+                          65 lua_rawgeti
                           3C lua_getfield
                           47 lua_gettable
                           5B lua_pushlightuserdata
                           59 lua_pushfstring
-                           B luaL_checknumber
-                          20 luaL_optnumber
-                           5 luaL_buffinit
-                          21 luaL_prepbuffsize
-                           1 luaL_addlstring
-                          22 luaL_pushresult
                           5C lua_pushlstring
                           5A lua_pushinteger
                           5E lua_pushnumber
@@ -69,8 +69,8 @@ File Type: DLL
                           57 lua_pushboolean
 
     libssl-3-x64.dll
-             1800093D0 Import Address Table
-             18000C090 Import Name Table
+             180009390 Import Address Table
+             18000BF90 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -118,7 +118,6 @@ File Type: DLL
                           4C SSL_CTX_ctrl
                           50 SSL_CTX_dane_set_flags
                           4E SSL_CTX_dane_enable
-                          E3 SSL_CTX_use_psk_identity_hint
                           47 SSL_CTX_check_private_key
                           A4 SSL_CTX_set_default_passwd_cb_userdata
                           A3 SSL_CTX_set_default_passwd_cb
@@ -132,6 +131,7 @@ File Type: DLL
                           5E SSL_CTX_get_cert_store
                           54 SSL_CTX_free
                           7A SSL_CTX_new
+                          E3 SSL_CTX_use_psk_identity_hint
                           98 SSL_CTX_set_cipher_list
                          1DC SSL_select_next_proto
                           BA SSL_CTX_set_psk_server_callback
@@ -141,8 +141,8 @@ File Type: DLL
                           B6 SSL_CTX_set_options
 
     libcrypto-3-x64.dll
-             180009178 Import Address Table
-             18000BE38 Import Name Table
+             180009138 Import Address Table
+             18000BD38 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
@@ -191,6 +191,19 @@ File Type: DLL
                          1DE BIO_s_mem
                          15B BIO_ctrl
                          1FF BIO_write
+                         1B4 BIO_new
+                         3C6 CRYPTO_free
+                         B6B OPENSSL_sk_push
+                         B62 OPENSSL_sk_free
+                         B66 OPENSSL_sk_new_null
+                         61A ERR_clear_error
+                         647 ERR_peek_error
+                        1489 X509_up_ref
+                         44B DH_free
+                         B72 OPENSSL_sk_value
+                         B68 OPENSSL_sk_num
+                         55C EC_KEY_new_by_curve_name
+                         599 EC_get_builtin_curves
                          17E BIO_free
                          1C2 BIO_new_mem_buf
                          54E EC_KEY_free
@@ -207,102 +220,81 @@ File Type: DLL
                          620 ERR_get_error
                          658 ERR_reason_error_string
                          A99 OBJ_nid2sn
-                         599 EC_get_builtin_curves
-                         55C EC_KEY_new_by_curve_name
-                         B68 OPENSSL_sk_num
-                         B72 OPENSSL_sk_value
-                         44B DH_free
-                        1489 X509_up_ref
-                         647 ERR_peek_error
-                         61A ERR_clear_error
-                         B66 OPENSSL_sk_new_null
-                         B62 OPENSSL_sk_free
-                         B6B OPENSSL_sk_push
-                         3C6 CRYPTO_free
-                         1B4 BIO_new
 
     WS2_32.dll
-             1800090B0 Import Address Table
-             18000BD70 Import Name Table
+             180009068 Import Address Table
+             18000BC68 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                             Ordinal    18
-                             Ordinal   111
-                             Ordinal   115
-                             Ordinal    10
-                             Ordinal     3
-                             Ordinal   151
                           AA getnameinfo
+                             Ordinal   151
+                             Ordinal     3
+                             Ordinal    10
+                             Ordinal   111
+                             Ordinal    18
+                             Ordinal   115
                              Ordinal   116
 
     KERNEL32.dll
              180009000 Import Address Table
-             18000BCC0 Import Name Table
+             18000BC00 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                         38E IsDebuggerPresent
-                         378 InitializeSListHead
-                         125 DisableThreadLibraryCalls
-                         226 GetCurrentThreadId
-                         222 GetCurrentProcessId
-                         45B QueryPerformanceCounter
-                         395 IsProcessorFeaturePresent
-                         5AC TerminateProcess
-                         221 GetCurrentProcess
-                         58D SetUnhandledExceptionFilter
-                         5CE UnhandledExceptionFilter
-                         4EE RtlVirtualUnwind
-                         4E7 RtlLookupFunctionEntry
-                         4DF RtlCaptureContext
-                         2F8 GetSystemTimeAsFileTime
-                         59D Sleep
+                         39A InitializeSListHead
+                         142 DisableThreadLibraryCalls
+                         246 GetCurrentThreadId
+                         242 GetCurrentProcessId
+                         481 QueryPerformanceCounter
+                         5C8 Sleep
+                         31A GetSystemTimeAsFileTime
 
     VCRUNTIME140.dll
-             180009088 Import Address Table
-             18000BD48 Import Name Table
+             180009040 Import Address Table
+             18000BC40 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
+                          3C memcpy
                           3E memset
                            8 __C_specific_handler
                           25 __std_type_info_destroy_list
-                          3C memcpy
-
-    api-ms-win-crt-string-l1-1-0.dll
-             180009158 Import Address Table
-             18000BE18 Import Name Table
-                     0 time date stamp
-                     0 Index of first forwarder reference
-
-                          8E strncmp
-                          86 strcmp
-                          8F strncpy
 
     api-ms-win-crt-heap-l1-1-0.dll
-             1800090F8 Import Address Table
-             18000BDB8 Import Name Table
+             1800090B0 Import Address Table
+             18000BCB0 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
                           19 malloc
                           18 free
 
-    api-ms-win-crt-runtime-l1-1-0.dll
+    api-ms-win-crt-string-l1-1-0.dll
              180009110 Import Address Table
-             18000BDD0 Import Name Table
+             18000BD10 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                          22 _execute_onexit_table
-                          36 _initterm
-                          37 _initterm_e
-                          3F _seh_filter_dll
-                          18 _configure_narrow_argv
-                          33 _initialize_narrow_environment
-                          34 _initialize_onexit_table
+                          8B strlen
+                          86 strcmp
+                          8F strncpy
+                          8E strncmp
+
+    api-ms-win-crt-runtime-l1-1-0.dll
+             1800090C8 Import Address Table
+             18000BCC8 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
                           16 _cexit
+                          18 _configure_narrow_argv
+                          34 _initialize_onexit_table
+                          33 _initialize_narrow_environment
+                          3F _seh_filter_dll
+                          37 _initterm_e
+                          36 _initterm
+                          22 _execute_onexit_table
 
   Summary
 

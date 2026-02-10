@@ -1,4 +1,4 @@
-Microsoft (R) COFF/PE Dumper Version 14.43.34808.0
+Microsoft (R) COFF/PE Dumper Version 14.50.35723.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
@@ -17,12 +17,12 @@ File Type: DLL
 
     ordinal hint RVA      name
 
-          1    0 000032C0 lsec_get_ssl_options
-          2    1 00004B90 luaopen_ssl
+          1    0 00003200 lsec_get_ssl_options
+          2    1 00004AA0 luaopen_ssl
           3    2 00001000 luaopen_ssl_config
-          4    3 00002B00 luaopen_ssl_context
-          5    4 00004BC0 luaopen_ssl_core
-          6    5 00006140 luaopen_ssl_x509
+          4    3 00002A50 luaopen_ssl_context
+          5    4 00004AD0 luaopen_ssl_core
+          6    5 00006050 luaopen_ssl_x509
 
   Summary
 

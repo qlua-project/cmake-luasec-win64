@@ -1,4 +1,4 @@
-Microsoft (R) COFF/PE Dumper Version 14.43.34808.0
+Microsoft (R) COFF/PE Dumper Version 14.50.35723.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
@@ -14,8 +14,8 @@ File Type: DLL
     WS2_32.dll
     KERNEL32.dll
     VCRUNTIME140.dll
-    api-ms-win-crt-string-l1-1-0.dll
     api-ms-win-crt-heap-l1-1-0.dll
+    api-ms-win-crt-string-l1-1-0.dll
     api-ms-win-crt-runtime-l1-1-0.dll
 
   Summary
